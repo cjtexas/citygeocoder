@@ -1,0 +1,13 @@
+Package: citygeocoder
+Type: Package
+Title: citygeocoder
+Version: 1.0.0
+Author: Caleb Jenkins
+Maintainer: Caleb Jenkins <caleb.a.jenkins@gmail.com>
+Description: Standard and reverse geocoding for US cities/populated places.
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    data.table
+RoxygenNote: 7.0.0
