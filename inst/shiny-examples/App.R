@@ -64,11 +64,32 @@ server <- function(input, output) {
     } else {
       leafletProxy('map') %>%
         clearMarkers() %>%
-        setView(lng= values$geocode$lon, values$geocode$lat, 12) %>%
+        removeScaleBar() %>%
+        flyTo(lng= values$geocode$lon, values$geocode$lat, 10) %>%
         addCircleMarkers(
           lng = values$geocode$lon,
           lat = values$geocode$lat,
-          popup = paste(format(values$geocode$lon, nsmall = 5),  format(values$geocode$lat, nsmall = 5), sep = ",")
+          color = "#03FFC0",
+          fillColor = "#03FFC0"
+        ) %>%
+        addLabelOnlyMarkers(
+          lng = values$geocode$lon,
+          lat = values$geocode$lat,
+          label = sprintf(
+            "%s %s",
+            paste(tools::toTitleCase(city), toupper(state), sep = ", "),
+            paste(
+              format(values$geocode$lon, nsmall = 5),
+              format(values$geocode$lat, nsmall = 5),
+              sep = ", "
+            )
+          ),
+          labelOptions = labelOptions(
+            noHide = T,
+            direction = 'top',
+            textOnly = T,
+            style = list("color" = "#03FFC0", "font-weight" = "bold", "font-size" = "20px")
+          )
         )
     }
 
@@ -96,22 +117,48 @@ server <- function(input, output) {
       message(values$revgeocode$lat)
       leafletProxy('map') %>%
         clearMarkers() %>%
-        setView(lng= values$revgeocode$lon, values$revgeocode$lat, 12) %>%
+        addScaleBar() %>%
+        flyTo(lng= values$revgeocode$lon, values$revgeocode$lat, 10) %>%
+        addCircleMarkers(
+          lng = lon,
+          lat = lat,
+          color = "#ffc003"
+        ) %>%
         addCircleMarkers(
           lng = values$revgeocode$lon,
           lat = values$revgeocode$lat,
-          popup = paste(
+          color = "#03FFC0",
+          fillColor = "#03FFC0"
+        ) %>%
+        addLabelOnlyMarkers(
+          lng = values$revgeocode$lon,
+          lat = values$revgeocode$lat,
+          label = sprintf(
+            "%s %s",
+            paste(values$revgeocode$city, values$revgeocode$state, sep = ", "),
             paste(
-              paste(
-                tools::toTitleCase(values$revgeocode$city),
-                tools::toTitleCase(values$revgeocode$state),
-                collapse = ","
-              ),
-              "<br>"
-            ),
-            paste(format(values$revgeocode$lon, nsmall = 5),  format(values$revgeocode$lat, nsmall = 5), sep = ",")
+              format(values$revgeocode$lon, nsmall = 5),
+              format(values$revgeocode$lat, nsmall = 5),
+              sep = ", "
+            )
           ),
-          popupOptions = popupOptions(noHide = T)
+          labelOptions = labelOptions(
+            noHide = T,
+            direction = 'top',
+            textOnly = T,
+            style = list("color" = "#03FFC0", "font-weight" = "bold", "font-size" = "20px")
+          )
+        ) %>%
+        addLabelOnlyMarkers(
+          lng = lon,
+          lat = lat,
+          label = paste(lon, lat, sep = ","),
+          labelOptions = labelOptions(
+            noHide = T,
+            direction = 'top',
+            textOnly = T,
+            style = list("color" = "#ffc003 ", "font-weight" = "bold", "font-size" = "20px")
+          )
         )
     }
 
