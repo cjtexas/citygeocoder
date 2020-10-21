@@ -3,9 +3,9 @@
 \docType{package}
 \name{citygeocoder}
 \alias{citygeocoder}
-\title{Standard and reverse geocoding for US populated places.}
+\title{Standard and reverse geocoding for US cities/populated places.}
 \description{
-Standard and reverse geocoding for US populated places.
+Standard and reverse geocoding for US cities/populated places.
 }
 \author{
 Caleb Jenkins (@cjtexas)

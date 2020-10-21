@@ -7,7 +7,7 @@
 
 <!-- badges: end -->
 
-I wanted a simple but fast, city-level geocoder for the US…
+A simple and fast city-level geocoder and reverse geocoder for the US…
 
 ## Installation
 
@@ -95,8 +95,8 @@ reverse_geocode(df2$Lon, df2$Lat)
 #> 5 Rochester    TX -99.85593 33.31593 0.14511042
 ```
 
-4.  I also included an example Shiny App that demonstrates the Package
-    functions - NOTE: Requires Additional Packages (leaflet, shiny,
-    shinydashboard)
+4.  I’ve also included an example Shiny App that demonstrates the
+    Package’s functions - NOTE: Requires Additional Packages (leaflet,
+    shiny, shinydashboard)
 
 `citygeocoder:::shiny_example()`
