@@ -21,11 +21,17 @@ reverse_geocode <- function(lon=-101.68181, lat=34.61681) {
       distances_mat[i, closest[i]]
     })
 
-  as.data.frame(
-    cbind(
-      citygeocoder::us_cities_dt[closest, ],
-      distance = closest_distances
+  output <-
+    as.data.frame(
+      cbind(
+        citygeocoder::us_cities_dt[closest, ],
+        distance = closest_distances
+      )
     )
-  )
+
+  output$city <- tools::toTitleCase(output$city)
+  output$state <- base::toupper(output$state)
+
+  return(output)
 
 }
