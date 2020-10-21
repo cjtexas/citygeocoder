@@ -1,0 +1,88 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# citygeocoder
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+I wanted a simple but fast, city-level geocoder for the US...
+
+## Installation
+
+You can install the development version from [GitHub](https://github.com/cjtexas/citygeocoder) with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("cjtexas/citygeocoder")
+```
+## Examples
+
+1. Geocode
+
+```{r}
+library(citygeocoder)
+
+citygeocoder::geocode("Austin", "TX")
+```
+
+2. Reverse Geocode
+
+```{r}
+library(citygeocoder)
+
+citygeocoder::reverse_geocode(lon = -98.7654321, lat = 34.56789)
+```
+
+3. Batch Mode!
+
+```{r}
+df1 <-
+  read.table(
+    text =
+    "City       | State
+    Scranton    | PA
+    Oakland     | CA
+    New York    | NY
+    Columbus    | IN",
+    header = T,
+    sep = "|",
+    stringsAsFactors = FALSE,
+    strip.white = TRUE
+  )
+
+citygeocoder::geocode(df1$City, df1$State)
+
+df2 <-
+  read.table(
+    text =
+      "Lon    | Lat
+    -95.55555 | 37.77777  
+    -96.66666 | 36.66666
+    -97.77777 | 35.55555  
+    -98.88888 | 34.44444
+    -99.99999 | 33.33333",
+    header = T,
+    sep = "|",
+    stringsAsFactors = FALSE,
+    strip.white = TRUE
+  )
+
+reverse_geocode(df2$Lon, df2$Lat)
+```
+
+4. I also included an example Shiny App that demonstrates the Package functions - NOTE: Requires Additional Packages (leaflet, shiny, shinydashboard)
+
+```citygeocoder:::shiny_example()```
