@@ -12,7 +12,7 @@
 geocode <- function(search_city="Boerne", search_state="TX") {
 
   .result <-
-    citygeocoder::us_cities_dt[paste(city, state) %in% paste(tolower(search_city), tolower(search_state))]
+    citygeocoder::us_cities_dt[paste(city, state, "_") %in% paste(tolower(search_city), tolower(search_state), "_")]
 
   # merge back with search vectors to preserve original order
   as.data.frame(
